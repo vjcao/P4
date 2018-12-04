@@ -59,41 +59,64 @@ double findMST(vector<Pokemon> &graph) {
 	graph[0].setDistance(0);
 	graph[0].setPrev(-1);
 	double weight = 0;
+	int minEdgeIndex = 0;
 
 	for (int i = 0; i < (int)graph.size(); i++) {
-		int minIndex = findMinKey(graph);
+		double minDistance = numeric_limits<double>::max();
+		int minIndex;
+		//int numIndexChange = 0;
+		if (i == 0) {
+			minIndex = 0;
+		}
+		else {
+			minIndex = minEdgeIndex;//findMinKey(graph);
+		}
 		graph[minIndex].setVisited(true);
 		weight += graph[minIndex].getDistance();
 		double distance;
-		if (isSea(graph[minIndex])) {
-			for (int j = 0; j < (int)graph.size(); j++) {
-				if ((isSea(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
-					distance = calcDistance(graph[minIndex], graph[j]);
-					if (distance < graph[j].getDistance()) {
-						graph[j].setDistance(distance);
-						graph[j].setPrev(minIndex);
+		if (i != (int)graph.size() - 1) {
+			if (isSea(graph[minIndex])) {
+				for (int j = 0; j < (int)graph.size(); j++) {
+					if ((isSea(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
+						distance = calcDistance(graph[minIndex], graph[j]);
+						if (distance < graph[j].getDistance()) {
+							graph[j].setDistance(distance);
+							graph[j].setPrev(minIndex);
+						}
+					}
+					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+						minDistance = graph[j].getDistance();
+						minEdgeIndex = j;
 					}
 				}
 			}
-		}
-		else if (isLand(graph[minIndex])) {
-			for (int j = 0; j < (int)graph.size(); j++) {
-				if ((isLand(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
-					distance = calcDistance(graph[minIndex], graph[j]);
-					if (distance < graph[j].getDistance()) {
-						graph[j].setDistance(distance);
-						graph[j].setPrev(minIndex);
+			else if (isLand(graph[minIndex])) {
+				for (int j = 0; j < (int)graph.size(); j++) {
+					if ((isLand(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
+						distance = calcDistance(graph[minIndex], graph[j]);
+						if (distance < graph[j].getDistance()) {
+							graph[j].setDistance(distance);
+							graph[j].setPrev(minIndex);
+						}
+					}
+					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+						minDistance = graph[j].getDistance();
+						minEdgeIndex = j;
 					}
 				}
 			}
-		}
-		else {
-			for (int j = 0; j < (int)graph.size(); j++) {
-				if (graph[j].isVisited() == false && j != minIndex) {
-					distance = calcDistance(graph[minIndex], graph[j]);
-					if (distance < graph[j].getDistance()) {
-						graph[j].setDistance(distance);
-						graph[j].setPrev(minIndex);
+			else {
+				for (int j = 0; j < (int)graph.size(); j++) {
+					if (graph[j].isVisited() == false && j != minIndex) {
+						distance = calcDistance(graph[minIndex], graph[j]);
+						if (distance < graph[j].getDistance()) {
+							graph[j].setDistance(distance);
+							graph[j].setPrev(minIndex);
+						}
+					}
+					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+						minDistance = graph[j].getDistance();
+						minEdgeIndex = j;
 					}
 				}
 			}

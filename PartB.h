@@ -1,11 +1,9 @@
 #ifndef PARTB_H
 #define PARTB_H
 
-#include <iostream>
-#include <vector>
+#include "PartA.h"
 
-using namespace std;
-
+double findMSTPartB(/*vector<Pokemon> &graph*/);
 
 
 #endif //PARTB_H
