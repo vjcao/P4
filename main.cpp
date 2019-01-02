@@ -1,12 +1,14 @@
 #include <iostream>
 #include <iomanip>
 #include <getopt.h>
-#include "PartA.h"
+#include "PartC.h"
 
 using namespace std;
 
 void printHelp() {
-
+	cout << "This program has three modes: MST, FASTTSP, and OSTTSP\n";
+	cout << "To run this program, use -m or --mode followed by MST/FASTTSP/OPTTSP\n";
+	cout << "For example, to run in MST, use -m MST\n";
 	return;
 }
 
@@ -24,7 +26,7 @@ void getOptions(int argc, char *argv[], string &mode) {
 			case 'm': {
 				mode = optarg;
 				if (mode != "MST" && mode != "FASTTSP" && mode != "OPTTSP") {
-					cout << "ERROR: invalid mode specified";
+					cerr << "ERROR: invalid mode specified";
 				}
 				break;
 			}
@@ -56,9 +58,16 @@ int main(int argc, char* argv[]) {
 			break;
 		}
 		case 'F': {
+			vector<Point> nodes;
+			vector<int> path;
+			cout << arbitraryInsertion(nodes, path) << "\n";
+			printPath(path);
 			break;
 		}
 		case 'O': {
+			OPTTSP solution;
+			solution.genPerms(1, 0);
+			solution.printBestPath();
 			break;
 		}
 	}

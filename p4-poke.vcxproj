@@ -143,11 +143,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="partA.cpp" />
     <ClCompile Include="partB.cpp" />
-    <ClCompile Include="partC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PartA.h" />
     <ClInclude Include="PartB.h" />
+    <ClInclude Include="PartC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

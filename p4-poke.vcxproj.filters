@@ -24,15 +24,18 @@
     <ClCompile Include="partB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="partC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="getopt.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PartA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PartB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PartC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

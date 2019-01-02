@@ -24,7 +24,7 @@ void readFile(vector<Pokemon> &graph) {
 		graph.push_back(Pokemon(x, y));
 	}
 	if (numSea > 0 && numLand > 0 && numCoast == 0) {
-		cerr << "Cannot construct MST";
+		cerr << "Cannot construct MST\n";
 		exit(1);
 	}
 }
@@ -42,6 +42,7 @@ double calcDistance(Pokemon &pokemon1, Pokemon &pokemon2) {
 }
 
 //FIXME: REMOVE AFTER OPTIMIZING
+/*
 int findMinKey(vector<Pokemon> &graph) {
 	double min = numeric_limits<double>::max();
 	int minIndex = 0;
@@ -53,6 +54,7 @@ int findMinKey(vector<Pokemon> &graph) {
 	}
 	return minIndex;
 }
+*/
 
 //FIXME: OPTIPMIZE
 double findMST(vector<Pokemon> &graph) {
@@ -69,7 +71,7 @@ double findMST(vector<Pokemon> &graph) {
 			minIndex = 0;
 		}
 		else {
-			minIndex = minEdgeIndex;//findMinKey(graph);
+			minIndex = minEdgeIndex;
 		}
 		graph[minIndex].setVisited(true);
 		weight += graph[minIndex].getDistance();
@@ -77,14 +79,18 @@ double findMST(vector<Pokemon> &graph) {
 		if (i != (int)graph.size() - 1) {
 			if (isSea(graph[minIndex])) {
 				for (int j = 0; j < (int)graph.size(); j++) {
-					if ((isSea(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
+					if ((isSea(graph[j]) || isCoast(graph[j])) && 
+						graph[j].isVisited() == false && 
+						j != minIndex) {
 						distance = calcDistance(graph[minIndex], graph[j]);
 						if (distance < graph[j].getDistance()) {
 							graph[j].setDistance(distance);
 							graph[j].setPrev(minIndex);
 						}
 					}
-					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+					if (graph[j].isVisited() == false && 
+						graph[j].getDistance() - minDistance < 0 && 
+						j != minIndex) {
 						minDistance = graph[j].getDistance();
 						minEdgeIndex = j;
 					}
@@ -92,14 +98,18 @@ double findMST(vector<Pokemon> &graph) {
 			}
 			else if (isLand(graph[minIndex])) {
 				for (int j = 0; j < (int)graph.size(); j++) {
-					if ((isLand(graph[j]) || isCoast(graph[j])) && graph[j].isVisited() == false && j != minIndex) {
+					if ((isLand(graph[j]) || isCoast(graph[j])) && 
+						graph[j].isVisited() == false && 
+						j != minIndex) {
 						distance = calcDistance(graph[minIndex], graph[j]);
 						if (distance < graph[j].getDistance()) {
 							graph[j].setDistance(distance);
 							graph[j].setPrev(minIndex);
 						}
 					}
-					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+					if (graph[j].isVisited() == false && 
+						graph[j].getDistance() - minDistance < 0 && 
+						j != minIndex) {
 						minDistance = graph[j].getDistance();
 						minEdgeIndex = j;
 					}
@@ -114,7 +124,9 @@ double findMST(vector<Pokemon> &graph) {
 							graph[j].setPrev(minIndex);
 						}
 					}
-					if (graph[j].isVisited() == false && graph[j].getDistance() - minDistance < 0 && j != minIndex) {
+					if (graph[j].isVisited() == false && 
+						graph[j].getDistance() - minDistance < 0 && 
+						j != minIndex) {
 						minDistance = graph[j].getDistance();
 						minEdgeIndex = j;
 					}
@@ -128,7 +140,8 @@ double findMST(vector<Pokemon> &graph) {
 
 void printMST(vector<Pokemon> &graph) {
 	for (int i = 1; i < (int)graph.size(); i++) {
-		cout << min(i, graph[i].getPrev()) << " " << max(i, graph[i].getPrev()) << "\n";
+		cout << min(i, graph[i].getPrev()) << " " 
+			 << max(i, graph[i].getPrev()) << "\n";
 	}
 }
 
@@ -137,9 +150,12 @@ bool isSea(Pokemon &pokemon) {
 }
 
 bool isCoast(Pokemon &pokemon) {
-	return ((pokemon.getX() <= 0 && pokemon.getY() == 0) || (pokemon.getX() == 0 && pokemon.getY() <= 0));
+	return ((pokemon.getX() <= 0 && pokemon.getY() == 0) || 
+			(pokemon.getX() == 0 && pokemon.getY() <= 0));
 }
 
 bool isLand(Pokemon &pokemon) {
-	return ((pokemon.getX() > 0 && pokemon.getY() > 0) || (pokemon.getX() <= 0 && pokemon.getY() > 0) || (pokemon.getX() > 0 && pokemon.getY() <= 0));
+	return ((pokemon.getX() > 0 && pokemon.getY() > 0) || 
+			(pokemon.getX() <= 0 && pokemon.getY() > 0) || 
+			(pokemon.getX() > 0 && pokemon.getY() <= 0));
 }

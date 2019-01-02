@@ -11,7 +11,9 @@ using namespace std;
 
 class Pokemon {
 public:
-	Pokemon(int xIn, int yIn) : x(xIn), y(yIn), prev(-2), distance(numeric_limits<double>::infinity()), visited(false) {}
+	Pokemon(int xIn, int yIn)
+		: x(xIn), y(yIn), prev(-2), 
+		distance(numeric_limits<double>::infinity()), visited(false) {}
 
 	int getX() {
 		return x;
