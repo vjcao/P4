@@ -56,7 +56,7 @@ int findMinKey(vector<Pokemon> &graph) {
 }
 */
 
-//FIXME: OPTIPMIZE
+//FIXME: OPTIMIZE
 double findMST(vector<Pokemon> &graph) {
 	graph[0].setDistance(0);
 	graph[0].setPrev(-1);
