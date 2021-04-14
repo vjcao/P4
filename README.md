@@ -11,3 +11,6 @@ Part B estimates the length the TSP through the use of heuristics. The specific 
 
 ## Part C
 Part C calculates the actual TSP length through the use of a backtracking algorithm and uses the estimation from Part B as the starting point. Any generated branch for the TSP path with a length that is greater than the estimation or previous smallest TSP will be pruned and a new branch will be selected until the smallest TSP path branch is selected. 
+
+## Running the Program
+To run the program, clone the repository to your desired directory. In your local repository directory, run `make all`. This command will compile all the necessary files. After compiling, run `./poke -m [ mode ] < ./tests/[ testfile ]`. `[ mode ]` can be `MST`, `FASTTSP`, and `OPTTSP`. `MST` will run Part A, `FASTTSP` will run Part B, and `OPTTSP` will run Part C.
